@@ -22,6 +22,26 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    before(app) {
+      app.get('/app/seller', function(req, res) {
+        res.json({
+          errno: 0,
+          data: seller
+        })
+      })
+      app.get('/app/goods', function(req, res) {
+        res.json({
+          errno: 0,
+          data: goods
+        })
+      })
+      app.get('/app/ratings', function(req, res) {
+        res.json({
+          errno: 0,
+          data: ratings
+        })
+      })
+    },
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
@@ -67,6 +87,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 })
+
+const appData = require('../data.json')
+
+var seller = appData.seller
+var goods = appData.goods
+var ratings = appData.ratings
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port
