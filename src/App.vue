@@ -23,7 +23,7 @@ const ERR_OK = 0
 
 export default {
   created () {
-    this.$http.get('/app/seller').then((res) => {
+    this.$http.get('/api/seller').then((res) => {
       res = res.data
       if (res.errno === ERR_OK) {
         this.seller = res.data
